@@ -1,5 +1,5 @@
 import axios from "../helpers/axios";
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from "./types";
+import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_REQUEST } from "./types";
 
 export const logIn = (user) => {
   console.log(user);
@@ -49,5 +49,14 @@ export const isUserLoggedIn = () => {
         payload: {error: 'Failed to login'}
       })
     }
+  }
+}
+
+export const signout = () => {
+  return async dispatch => {
+    localStorage.clear();
+    dispatch({
+      type: LOGOUT_REQUEST
+    })
   }
 }

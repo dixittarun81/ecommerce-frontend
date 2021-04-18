@@ -1,39 +1,34 @@
-import React,{useState,useEffect} from "react";
+import React, { useState} from "react";
 import Layout from "../components/Layout";
 import { Container, Form, Row, Col, Button } from "react-bootstrap";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Input from "../components/Ui/Input";
-import { logIn, isUserLoggedIn } from "../actions/auth";
+import { logIn } from "../actions/auth";
 import { useDispatch } from "react-redux";
 import { Redirect } from "react-router";
 
 export default function Signin() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const auth = useSelector(state => state.auth);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  //const [error, setError] = useState('');
+  const auth = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if(!auth.authenticate){
-      dispatch(isUserLoggedIn())
-    }
-  },[])
 
   const userLogin = (e) => {
     e.preventDefault();
 
     const user = {
-      email,password
+      email,
+      password,
     };
 
     dispatch(logIn(user));
   };
 
-  if(auth.authenticate) {
-    return <Redirect to={`/`}/>
+  if (auth.authenticate) {
+    return <Redirect to={`/`} />;
   }
 
   return (

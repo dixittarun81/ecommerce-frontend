@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS } from "../actions/types";
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_REQUEST } from "../actions/types";
 
 const INITIAL_STATE = {
   token: null,
@@ -24,6 +24,8 @@ const authReducer = (state = INITIAL_STATE, action) => {
         authenticate: true,
         authenticating: false
       });
+    case LOGOUT_REQUEST:
+      return (state = {...INITIAL_STATE});
     default:
       return state;
   }
