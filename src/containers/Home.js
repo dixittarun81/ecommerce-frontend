@@ -1,11 +1,15 @@
 import React from "react";
-import { Jumbotron } from "react-bootstrap";
+import {Jumbotron} from 'react-bootstrap'
+
 import Layout from "../components/Layout";
+import './home.css';
 
 export default function Home() {
   return (
-    <Layout>
-      {/* <Jumbotron
+    <Layout sidebar>
+      
+      
+      <Jumbotron
         style={{ margin: "5rem", background: "#fff" }}
         className="text-center"
       >
@@ -19,7 +23,7 @@ export default function Home() {
           Dignissimos quia quas cupiditate animi minima asperiores delectus
           pariatur provident optio, facere dolores impedit vel quam excepturi
         </p>
-      </Jumbotron> */}
+      </Jumbotron>
     </Layout>
   );
 }

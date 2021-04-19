@@ -1,4 +1,10 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_REQUEST } from "../actions/types";
+import {
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGOUT_FAILURE,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+} from "../actions/types";
 
 const INITIAL_STATE = {
   token: null,
@@ -10,6 +16,9 @@ const INITIAL_STATE = {
   },
   authenticate: false,
   authenticating: true,
+  loading: false,
+  error: null,
+  message: "",
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
@@ -22,10 +31,18 @@ const authReducer = (state = INITIAL_STATE, action) => {
         user: action.payload.user,
         token: action.payload.token,
         authenticate: true,
-        authenticating: false
+        authenticating: false,
       });
     case LOGOUT_REQUEST:
-      return (state = {...INITIAL_STATE});
+      return (state = { ...state, loading: true });
+    case LOGOUT_SUCCESS:
+      return (state = { ...INITIAL_STATE });
+    case LOGOUT_FAILURE:
+      return (state = {
+        ...state,
+        error: action.payload.error,
+        loading: false,
+      });
     default:
       return state;
   }
