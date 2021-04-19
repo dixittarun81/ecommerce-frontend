@@ -6,7 +6,6 @@ import {
 } from "./types";
 
 export const signup = (user) => {
-  console.log(user);
 
   return async (dispatch) => {
     dispatch({ type: USER_REGISTER_REQUEST });

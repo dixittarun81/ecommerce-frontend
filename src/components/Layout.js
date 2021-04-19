@@ -2,9 +2,10 @@ import React from "react";
 import Header from "./Header";
 import { Container, Row, Col } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import './sidebar.css';
 
 export default function Layout(props) {
-  console.log(props);
+  
   return (
     <>
       <Header />
