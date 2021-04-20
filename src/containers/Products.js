@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col} from "react-bootstrap";
+import { Container, Row, Col, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../actions/product";
 import Layout from "../components/Layout";
@@ -8,6 +8,7 @@ import NewModal from "../components/Ui/NewModal";
 
 export default function Products(props) {
   const Category = useSelector((state) => state.category);
+  const Product = useSelector((state) => state.product);
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
@@ -52,7 +53,33 @@ export default function Products(props) {
     setProductPictures([...productPictures, e.target.files[0]]);
   };
 
-  
+  const renderProducts = () => {
+    return (
+      <Table responsive="sm">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Description</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody>
+           {Product.products.length > 0 ? Product.products.map(product => <tr key={product._id}>
+            <td>1</td>
+            <td>{product.name}</td>
+            <td>{product.price}</td>
+            <td>{product.quantity}</td>
+            <td>{product.description}</td>
+            <td>--</td>
+          </tr>): null} 
+          
+        </tbody>
+      </Table>
+    );
+  };
 
   return (
     <Layout sidebar>
@@ -65,6 +92,9 @@ export default function Products(props) {
             </div>
           </Col>
         </Row>
+        <Row>
+          <Col>{renderProducts()}</Col>
+        </Row>
       </Container>
       <NewModal
         show={show}
@@ -72,57 +102,55 @@ export default function Products(props) {
         modalTitle={"Add New Product"}
       >
         <Input
-            label="Name"
-            value={name}
-            placeholder={"Product Name"}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <Input
-            label="Quantity"
-            value={quantity}
-            placeholder={"Quantity"}
-            onChange={(e) => setQuantity(e.target.value)}
-          />
-          <Input
-            label="Price"
-            value={price}
-            placeholder={"Price"}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-          <Input
-            label="Description"
-            value={description}
-            placeholder={"Description"}
-            onChange={(e) => setDescription(e.target.value)}
-          />
+          label="Name"
+          value={name}
+          placeholder={"Product Name"}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <Input
+          label="Quantity"
+          value={quantity}
+          placeholder={"Quantity"}
+          onChange={(e) => setQuantity(e.target.value)}
+        />
+        <Input
+          label="Price"
+          value={price}
+          placeholder={"Price"}
+          onChange={(e) => setPrice(e.target.value)}
+        />
+        <Input
+          label="Description"
+          value={description}
+          placeholder={"Description"}
+          onChange={(e) => setDescription(e.target.value)}
+        />
 
-          <select
-            className="form-control"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option>Select Category</option>
-            {createCategoryList(Category.categories).map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.name}
-              </option>
-            ))}
-          </select>
+        <select
+          className="form-control"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option>Select Category</option>
+          {createCategoryList(Category.categories).map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.name}
+            </option>
+          ))}
+        </select>
 
-          {productPictures.length > 0
-            ? productPictures.map((pic, index) => (
-                <div key={index}>{pic.name})</div>
-              ))
-            : ""}
+        {productPictures.length > 0
+          ? productPictures.map((pic, index) => (
+              <div key={index}>{pic.name})</div>
+            ))
+          : ""}
 
-          <input
-            type="file"
-            name="productPicture"
-            onChange={handleProductPictures}
-          />
+        <input
+          type="file"
+          name="productPicture"
+          onChange={handleProductPictures}
+        />
       </NewModal>
     </Layout>
   );
-
-  
 }
