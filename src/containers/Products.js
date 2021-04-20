@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Modal, Button } from "react-bootstrap";
+import { Container, Row, Col} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../actions/product";
 import Layout from "../components/Layout";
 import Input from "../components/Ui/Input";
+import NewModal from "../components/Ui/NewModal";
 
 export default function Products(props) {
   const Category = useSelector((state) => state.category);
@@ -65,12 +66,12 @@ export default function Products(props) {
           </Col>
         </Row>
       </Container>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add New Product</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Input
+      <NewModal
+        show={show}
+        handleClose={handleClose}
+        modalTitle={"Add New Product"}
+      >
+        <Input
             label="Name"
             value={name}
             placeholder={"Product Name"}
@@ -119,13 +120,7 @@ export default function Products(props) {
             name="productPicture"
             onChange={handleProductPictures}
           />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      </NewModal>
     </Layout>
   );
 

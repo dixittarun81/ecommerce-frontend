@@ -1,0 +1,49 @@
+<Input
+            label="Name"
+            value={name}
+            placeholder={"Product Name"}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Input
+            label="Quantity"
+            value={quantity}
+            placeholder={"Quantity"}
+            onChange={(e) => setQuantity(e.target.value)}
+          />
+          <Input
+            label="Price"
+            value={price}
+            placeholder={"Price"}
+            onChange={(e) => setPrice(e.target.value)}
+          />
+          <Input
+            label="Description"
+            value={description}
+            placeholder={"Description"}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+
+          <select
+            className="form-control"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option>Select Category</option>
+            {createCategoryList(Category.categories).map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.name}
+              </option>
+            ))}
+          </select>
+
+          {productPictures.length > 0
+            ? productPictures.map((pic, index) => (
+                <div key={index}>{pic.name})</div>
+              ))
+            : ""}
+
+          <input
+            type="file"
+            name="productPicture"
+            onChange={handleProductPictures}
+          />

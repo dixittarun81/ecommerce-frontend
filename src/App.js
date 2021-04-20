@@ -14,6 +14,7 @@ import PrivateRoute from "./components/HOC/PrivateRoute";
 
 
 import { isUserLoggedIn } from "./actions/auth";
+import {getAllCategory} from './actions/category';
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function App() {
   useEffect(() => {
     if (!auth.authenticate) {
       dispatch(isUserLoggedIn());
+      dispatch(getAllCategory());
     }
   }, []);
 
