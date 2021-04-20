@@ -25,6 +25,8 @@ export default function Category(props) {
     form.append('name', categoryName);
     form.append('parentId', parentCategoryId);
     form.append('categoryImage', categoryImage);
+
+   
     dispatch(addCategory(form));
 
     setShow(false);

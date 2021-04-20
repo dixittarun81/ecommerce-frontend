@@ -15,7 +15,7 @@ const buildNewCategories = (parentId, categories, category) => {
   let myCategories = [];
 
   for (let cat of categories) {
-    if (cat._id == parentId) {
+    if (cat._id === parentId) {
       myCategories.push({
         ...cat,
         children:
@@ -46,6 +46,7 @@ const buildNewCategories = (parentId, categories, category) => {
       });
     }
   }
+  return myCategories;
 };
 
 export default (state = INITIAL_STATE, action) => {
