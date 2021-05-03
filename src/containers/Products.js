@@ -90,8 +90,8 @@ export default function Products(props) {
     );
   };
 
-  const renderAddProductModal = () => {
-    <NewModal
+  const renderAddProductModal = () => { 
+    return (<NewModal
       show={show}
       handleClose={handleClose}
       modalTitle={"Add New Product"}
@@ -145,7 +145,8 @@ export default function Products(props) {
         name="productPicture"
         onChange={handleProductPictures}
       />
-    </NewModal>;
+    </NewModal>)
+    ;
   };
 
   const handleCloseProductDetailsModal = () => {
@@ -161,7 +162,7 @@ export default function Products(props) {
     if (!productDetails) {
       return null;
     }
-    
+
     return (
       <NewModal
         size="lg"
@@ -230,4 +231,4 @@ export default function Products(props) {
       {renderProductDetailsModal()}
     </Layout>
   );
-}
+};
